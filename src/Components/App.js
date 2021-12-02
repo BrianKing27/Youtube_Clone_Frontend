@@ -1,42 +1,49 @@
-import './App.css';
-//* =======================================================================================
+
 import React, {Component} from 'react';
-import YTsearch from 'youtube-api-v3-search'
-//* =======================================================================================
-import VideoPlayer from './VideoPlayer/VideoPlayer';
-import SearchBar from './SearchBar/SearchBar';
-import VideoList from './VideoList/VideoList.jsx'
+import SearchBar from './SearchBar/SearchBar'
+import API from './API/API'
+import VideoList from './VideoList/VideoList'
+import VideoDetail from './VideoDetail/VideoDetail'
+import VideoPlayer from './VideoPlayer/VideoPlayer'
 
 
 class App extends Component {
-  constructor(props){
-      super(props);
-      this.state = {
-          videos: "",
-          currentVideo: null
-      };
+  state = {
+    videos: [],
+    selectedVideos: null
   }
 
-
-  handleSubmit = (searchBarSearch) => {
-      YTsearch({
-        key: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyCG-y0z5MIMoaKfxiGB10qVzo9ZuA5LDmk&type=video&maxResults=3&part=snippet&q=overwatch',
-        term: searchBarSearch
-      }, (videos) => {
-        this.setState({
-          videos: videos,
-          currentVideo: videos[0]
-        })
-      }
-    )
-  }
+  handleSubmit = async (termFromSearchBar) => {
+     const response = await API.get('/search', {
+       params: {
+         q: termFromSearchBar
+       }
+     })
+     this.setState({
+       videos: response.data.items
+     });
+  };
+    handleVideoSelect = (video) => {
+      this.setState({selectedVideo: video})
+    }
 
   render(){
     return(
       <div>
-        <VideoPlayer videos = {this.state.videos[0]}/>
-        <SearchBar fetchVideos = {this.handleSubmit}/>
-        <VideoList videos={this.state.videos} />
+        <VideoPlayer videos={this.state.videos} />
+      <div className='ui container' style={{marginTop: '1em'}}>
+        <SearchBar handleFormSubmit={this.handleSubmit} />
+        <div className='ui grid'>
+          <div className="ui row">
+            <div className="eleven wide column">
+              <VideoDetail video={this.state.selectedVideo} />
+            </div>
+            <div className="five wide column">
+              <VideoList handleVideoSelect={this.handleVideoSelect} videos={this.state.videos} />
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     );
   };

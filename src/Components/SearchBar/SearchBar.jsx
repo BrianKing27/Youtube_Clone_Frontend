@@ -2,38 +2,29 @@
 import React, {Component} from 'react';
 
 class SearchBar extends Component{
-
-    constructor(props){
-        super(props);
-        this.state={
-            search: ""
-        }
-    }
-
+    state = {
+        term: ""
+    };
     handleChange = (event) => {
         this.setState({
-            search: event.target.value
+            term: event.target.value
         });
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.fetchVideos(this.state.search);
+        this.props.handleFormSubmit(this.state.term);
     }
 
     render(){
         return (
-            <div>
-                <form onSubmit={this.handleSubmit} className="d-flex">
-                    <input
-                    id="SearcBar"
-                    type="text"
-                    placeholder="Search..."
-                    aria-label="Search"
-                    name="search" 
-                    value={this.state.search}
-                    onChange={this.handleChange} />
-                    <button type="submit" value="Search">Search Videos</button>
+            <div className='search-bar ui segment'>
+                <form onSubmit ={this.handleSubmit} className='ui form'>
+                    <div className='field'>
+                        <label htmlFor='video-search'>Video Search</label>
+                        <input onChange={this.handleChange} name='video-search' type='text' value={this.state.term} />
+                        <button type="submit">Search</button>
+                    </div>
                 </form>
             </div>
 
