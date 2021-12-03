@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const VideoItem = ({video , handleVideoSelect}) => {
+const VideoPlayer = ({video , handleVideoSelect}) => {
     return (
         <div onClick={ () => handleVideoSelect(video)} className=' video-item item'>
             <img className='ui image' src={video.snippet.thumbnails.medium.url} alt={video.snippet.description}/>
@@ -11,4 +11,4 @@ const VideoItem = ({video , handleVideoSelect}) => {
         </div>
     )
 };
-export default VideoItem;
+export default VideoPlayer;
