@@ -1,0 +1,11 @@
+.bg_image {
+    background-image: url('../Images/brad-knight-huWlb1NP67w-unsplash.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: luminosity;
+    background-attachment: fixed;
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+}

@@ -16,10 +16,10 @@ class Searchbar extends React.Component {
 
     render() {
         return (
-            <div className='search-bar ui segment'>
+            <div className='SearchBar'>
                 <form onSubmit={this.handleSubmit} className='ui form'>
                     <div className='field'>
-                        <label htmlFor="video-search">Video Search</label>
+                        <label htmlFor="video-search"><h2>Youtube Clone</h2></label>
                         <input onChange={this.handleChange} name='video-search' type="text" value={this.state.term}/>
                     </div>
                 </form>

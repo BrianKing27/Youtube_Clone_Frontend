@@ -1,8 +1,9 @@
 import React from 'react';
-import SearchBar from './Searchbar/Searchbar';
+import SearchBar from './SearchBar/SearchBar';
 import youtube from '../apis/youtube';
 import VideoList from './VideoList/VideoList';
 import VideoDetail from './VideoDetail/VideoDetail';
+import './App.css'
 
 class App extends React.Component {
     state = {
@@ -25,6 +26,7 @@ class App extends React.Component {
 
     render() {
         return (
+        <div className="bg_image">
             <div className='ui container' style={{marginTop: '1em'}}>
                 <SearchBar handleFormSubmit={this.handleSubmit}/>
                 <div className='ui grid'>
@@ -38,6 +40,7 @@ class App extends React.Component {
                     </div>
                 </div>
             </div>
+        </div>
         )
     }
 }
